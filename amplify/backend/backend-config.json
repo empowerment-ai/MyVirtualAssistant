@@ -1,4 +1,34 @@
 {
+  "api": {
+    "chatapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "vachat"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    },
+    "promptsapi": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "vapromptapi"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "myvirtualassistantb7128e96": {
       "customAuth": false,
@@ -25,6 +55,90 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "vachat": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "chats"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "vapromptapi": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "prompt"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_vachat_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "vachat"
+        }
+      ]
+    },
+    "AMPLIFY_function_vachat_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "vachat"
+        }
+      ]
+    },
+    "AMPLIFY_function_vapromptapi_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "vapromptapi"
+        }
+      ]
+    },
+    "AMPLIFY_function_vapromptapi_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "vapromptapi"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "chats": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "prompt": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "resourceName": "prompt",
+  "tableName": "prompt",
+  "partitionKey": {
+    "fieldName": "id",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

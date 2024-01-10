@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import '@aws-amplify/ui-react/styles.css';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
+import PromptList from './components/PromptList';
+import ChatList from './components/ChatList';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         >
           Learn React with Amplify
         </a>
+        <PromptList />
+        <ChatList/>
       </header>
     </div>
   );
